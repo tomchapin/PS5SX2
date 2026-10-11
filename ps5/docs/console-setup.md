@@ -98,15 +98,18 @@ the separate helper is saved at
 The failing AIO menu copy was renamed `ps5sx2-aio.elf.disabled`.
 After future restarts, the separate helper must run after the jailbreak and
 before opening PS5SX2. Initially it was loaded manually. Automatic startup
-was subsequently configured as described below; the next fresh boot still
-needs to verify it.
+was subsequently configured and verified after a full restart as described
+below.
 
 ### Startup after a full restart
 
 The installed **WebKit Autoloader v0.6.1** launcher appears under **Media**.
-Start it, wait for the exploit to finish, then open Payloads / Payload Manager
-and load the same experimental etaHEN payload once. WebKit Autoloader completing
-does not itself mean that etaHEN or the PS5SX2 helper has loaded.
+Start it, wait for the exploit to finish, then let Payload Manager's 10-second
+autoload countdown run. It is now configured to send the saved
+`etaHEN-11.00-13.60.elf` automatically. The default repository's original
+`etaHEN_2.5B.bin` failed to start its services in the reboot test; it is a
+different build. WebKit Autoloader completing does not itself mean that etaHEN
+or the PS5SX2 helper has finished starting.
 
 To prevent the missing-helper failure, verified copies of ShadowMountPlus
 1.7-beta5fix1 and the separate helper were placed at:
@@ -120,9 +123,14 @@ To prevent the missing-helper failure, verified copies of ShadowMountPlus
 
 The empty sibling markers enable the running experimental etaHEN port's native
 payload startup. Both copies passed ELF validation and SHA-256 readback.
-After loading etaHEN, wait for its startup and the helper's notification, then
-open PS5SX2. The configuration is saved, but automatic loading on a fresh boot
-remains to be verified. Do not manually start duplicate copies during that test.
+After etaHEN loads, wait for its startup and the helper's notification, then
+open PS5SX2. The full startup chain passed a fresh-boot test: Payload Manager
+history contained only the matching HEN, and etaHEN discovered both plugins.
+ShadowMountPlus PID 96 and helper PID 97 were running automatically. The new
+PS5SX2 PID 98 received root 17 ms after its request, passed its JIT probe and
+drew its first interface frame after 653 ms. Its companion API reported
+`mode: menu`, and the user confirmed success. Do not manually start duplicate
+payloads when this chain is running.
 
 If the Media launcher fails, use the PC host, DNS and User's Guide route instead.
 The [etaHEN startup guide](https://github.com/tomchapin/etaHEN/blob/main/docs/ps5sx2-autostart.md)
