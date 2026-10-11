@@ -53,34 +53,22 @@ Expect rough edges. Bug reports with logs are very welcome, and so is patience.
 ## What you need
 
 - **A jailbroken PS5.** Development happens on a PS5 Pro on firmware 11.40. Testers have also run it on other PS5 models, including a Slim, on firmware 6.02 to 12.70. [Tested consoles](#tested-consoles) has the list.
-- **The PS5SX2 Helper payload**, from the releases, loaded together with kstuff. It's based on OnionHEN. It jailbreaks PS5SX2 when it starts, which the emulator's recompilers need, and gives the app access to `/data`.
+- **An app-elevation helper**, loaded before opening PS5SX2. Release 2.02 ships `ps5sx2-aio.elf`, combining the helper, installer and disc launcher. The separate `PS5SXHelper.elf` from release 2.00 is a verified workaround for the AIO failure described in [Console setup and troubleshooting](ps5/docs/console-setup.md) (AI-assisted). The helper grants the app the privileges its recompilers need and access to `/data`.
 - **[ShadowMountPlus](https://github.com/drakmor/ShadowMountPlus)**, loaded at every boot like kstuff. It mounts PS5SX2 from `/data/homebrew/PPSA99203/` and puts it on the home screen.
 - **Your own PS2 BIOS**, dumped from your own console.
 - **Your own games**, as `.iso`, `.chd`, `.cso` or `.zso` files.
 
-No BIOS, games or keys come with PS5SX2.
+No BIOS, games or keys come with PS5SX2. You can install the app and verify that its interface opens before supplying a BIOS or games; a missing-BIOS message is expected at that stage.
 
 ## Getting started
 
-For the main release, use PS5SX2Helper.elf and PS5SX2Installer.elf to launch PS5SX2 and automatically keep your build up to date.
+1. Follow the instructions for your [release](https://github.com/Swordpdf/PS5SX2/releases). For 2.02, the standard payload is `ps5sx2-aio.elf`; older releases use separate helper and installer ELFs.
+2. Keep your jailbreak's kstuff and ShadowMountPlus running. The app lives in `/data/homebrew/PPSA99203/`, and its resources live in `/data/PCSX2/`.
+3. Load the helper before launching PS5SX2, including after a console restart. Jailbreaking the console alone does not guarantee that the app has the privileges it needs.
+4. Put your PS2 BIOS dump in `/data/PCSX2/bios/` and game images in `/data/PCSX2/games/`. Folder names are lowercase. `SCPH-70012.bin` in the missing-BIOS message is an example filename, not a required name.
+5. Open PS5SX2 from the home screen. With empty folders, missing-BIOS and no-games messages confirm that the interface is running.
 
-For now, updates are planned to roll out weekly as we work toward full compatibility across the PS2 library. Bug fixes, compatibility improvements, and new features will be bundled into batches rather than pushed one by one.
-
-Thanks again for all the testing, logs, and feedback. It genuinely helps move this forward.
-
-TO GET IT RUNNING:
-
--Put PS5SX2Helper.elf and PS5SX2Installer.elf in your autoload. They’ll make sure you always get the latest build directly from GitHub.
-
--Place your legally acquired PS2 BIOS in:
-/data/PCSX2/bios
-
--Place your legally made game backups in:
-/data/PCSX2/games
-
--Enjoy.
-
-The first start downloads the covers for your games, then the shelf opens.
+For manual installation over FTP, release checksums, the verified separate-helper workaround, and startup log interpretation, see [Console setup and troubleshooting](ps5/docs/console-setup.md) (AI-assisted).
 
 ## Controls
 

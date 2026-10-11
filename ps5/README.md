@@ -4,6 +4,8 @@ PS5SX2 runs PCSX2 on a jailbroken PS5. Its renderer is PCSX2's Vulkan backend on
 
 ## Layout
 
+For installing the release app, loading its helper, adding a BIOS and diagnosing a black screen, see [Console setup and troubleshooting](docs/console-setup.md) (AI-assisted). The verified setup uses the published app; it does not require rebuilding the custom SDK and Vulkan driver.
+
 - **The repository root** is PCSX2: upstream commit 450a39a, imported without its history, with the port's changes as commits on top.
 - **`ps5/coreorbis/`**:
   - the app's entry point, `main-boot.cpp`;
