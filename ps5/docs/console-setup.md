@@ -96,8 +96,38 @@ Do not load both helper implementations together. In the tested installation,
 the separate helper is saved at
 `/data/pldmgr/payloads/PS5SX2/PS5SXHelper.elf`, with matching `.elf.json` metadata.
 The failing AIO menu copy was renamed `ps5sx2-aio.elf.disabled`.
-After future restarts, load the separate helper once after the jailbreak and
-before opening PS5SX2. Automatic loading was not configured or tested.
+After future restarts, the separate helper must run after the jailbreak and
+before opening PS5SX2. Initially it was loaded manually. Automatic startup
+was subsequently configured as described below; the next fresh boot still
+needs to verify it.
+
+### Startup after a full restart
+
+The installed **WebKit Autoloader v0.6.1** launcher appears under **Media**.
+Start it, wait for the exploit to finish, then open Payloads / Payload Manager
+and load the same experimental etaHEN payload once. WebKit Autoloader completing
+does not itself mean that etaHEN or the PS5SX2 helper has loaded.
+
+To prevent the missing-helper failure, verified copies of ShadowMountPlus
+1.7-beta5fix1 and the separate helper were placed at:
+
+```text
+/data/etaHEN/payloads/ShadowMountPlus_1.7-beta5fix1.elf
+/data/etaHEN/payloads/ShadowMountPlus_1.7-beta5fix1.elf.auto_start
+/data/etaHEN/payloads/PS5SXHelper.elf
+/data/etaHEN/payloads/PS5SXHelper.elf.auto_start
+```
+
+The empty sibling markers enable the running experimental etaHEN port's native
+payload startup. Both copies passed ELF validation and SHA-256 readback.
+After loading etaHEN, wait for its startup and the helper's notification, then
+open PS5SX2. The configuration is saved, but automatic loading on a fresh boot
+remains to be verified. Do not manually start duplicate copies during that test.
+
+If the Media launcher fails, use the PC host, DNS and User's Guide route instead.
+The [etaHEN startup guide](https://github.com/tomchapin/etaHEN/blob/main/docs/ps5sx2-autostart.md)
+records the version distinction, markers, checks and rollback. The original
+etaHEN binary in that fork was not substituted for the running experimental port.
 
 ### Automatic updates and remote logging in the AIO
 
